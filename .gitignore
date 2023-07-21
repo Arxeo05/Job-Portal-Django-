@@ -1,0 +1,15 @@
+# .gitignore
+*.pyc
+*~
+__pycache__
+myvenv/
+db.sqlite3
+*.sqlite3
+.DS_Store
+*.pyo
+*.pyc
+.vscode/
+.idea/
+.pytest_cache/
+.coverage
+.env
