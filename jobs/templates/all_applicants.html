@@ -1,0 +1,59 @@
+{% extends 'company_navbar.html' %}
+
+{% block title %} All Applicants {% endblock %}
+{% block all_applicants %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    thead {
+      background-color: #5361df;
+    }
+    th{
+        color: white;
+        margin-top:10px;
+    }
+</style>
+
+<div class="container mt-4 shadow-lg px-5 py-5 rounded " style="border:2px solid #5361df;">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <h2>All Applicants</h2>
+        </div>
+    </div>
+    <hr>
+    <table class="table table-hover" id="example">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Job Title</th>
+                <th>Applicant</th>
+                <th>Applied On</th>
+                <th>Resume</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in application %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.job}}</td>
+                <td>{{i.applicant}}</td>
+                <td>{{i.apply_date}}</td>
+                <td><a href="{{i.resume.url}}" class="btn"><i class="fa fa-file"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'admin_navbar.html' %}
+{% block title %} Company Details {% endblock %}
+{% block css %}
+{% load static %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <form class="container mt-4" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+    
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Old Password</label>
+                            <input type="password" class="form-control mt-2" name="old_pass" id="old_pass" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>New Password</label>
+                            <input type="password" class="form-control mt-2" name="new_pass1" id="new_pass1" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Confirm New Password</label>
+                            <input type="password" class="form-control mt-2" name="new_pass2" id="new_pass2" required>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit" class="btn mt-4" accept="image/*" style="background-color: #5361df; color: white; font-size: larger; width: 8rem;">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

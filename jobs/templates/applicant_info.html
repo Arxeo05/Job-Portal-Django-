@@ -1,0 +1,64 @@
+{% extends 'admin_navbar.html' %}
+
+{% block title %} Applicant Info {% endblock %}
+{% block view_applicants %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+{% load static %}
+<link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+<div class="container">
+    <div class="container">
+    <div class=" row mt-4">
+        <div class="form-group col-md-6">
+            <h2>User Profile</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <h4>{{applicant.user.get_full_name}}</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <h4>{{applicant.user.email}}</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <h4>{{applicant.phone}}</h4>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6 mt-4">
+            <h2>Applied Jobs</h2>
+            <hr>
+        </div>
+    </div>
+    <table class="table table-bordered table-hover table-sm" style="width: 40%;">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Employer</th>
+                <th>Application Date</th>
+                <th>Resume</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr>
+                <td>{{application.job.title}}</td>
+                <td>{{application.job.company}}</td>
+                <td>{{application.apply_date}}</td>
+                <td><a href="{{application.resume.url}}" class="btn"><i class="fa fa-file"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}

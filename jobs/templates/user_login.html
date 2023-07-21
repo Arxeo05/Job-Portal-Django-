@@ -1,0 +1,23 @@
+{% extends 'basic.html' %}
+
+{% block title %}Login Page{% endblock %}
+{% block user_login %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+
+<form method="POST"> {% csrf_token %}
+    <div class="container mt-4 shadow-lg px-5 py-5 rounded">
+        <div class="mb-3">
+            <label for="username" class="form-label"><b style="font-weight: bold;">Username or Email Address</b></label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username or Email Address" style="border-bottom-color:#5361df;">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label"><b style="font-weight: bold;">Password</b></label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" style="border-bottom-color:#5361df;">
+        </div>
+        <br>
+        <input type="submit" value="Submit" class="btn" style="background-color:#5361df; color:white; ">
+    </div>
+</form>
+{% endblock %}

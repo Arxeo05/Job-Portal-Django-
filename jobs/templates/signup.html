@@ -1,0 +1,73 @@
+{% extends 'basic.html' %}
+
+{% block title %} User Signup Page {% endblock %}
+{% block user_login %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<form class="container mt-4 shadow-lg px-5 py-5 rounded" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label><b>First Name</b></label>
+            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" style="border-bottom-color:#5361df;">
+        </div>
+        <div class="form-group col-md-6">
+            <label><b>Last Name</b></label>
+            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" style="border-bottom-color:#5361df;">
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><b>Password</b></label>
+            <input type="password" class="form-control" name="password1" id="password1" placeholder="Password" style="border-bottom-color:#5361df;">
+        </div>
+        <div class="form-group col-md-6">
+            <label><b>Confirm Password</b></label>
+            <input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password" style="border-bottom-color:#5361df;">
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><b>Username</b></label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Username" style="border-bottom-color:#5361df;">
+        </div>
+        <div class="form-group col-md-6">
+            <label><b>Email Address</b></label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" style="border-bottom-color:#5361df;">
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><b>Contact Number</b></label>
+            <input type="tel" class="form-control" name="phone" id="phone" placeholder="Contact Number" style="border-bottom-color:#5361df;">
+        </div>
+        <div class="form-group col-md-6">
+            <label><b>Gender</b></label>
+            <div style="border: 1px solid lightgrey; padding: 5px; border-radius: 6px; border-bottom-color:#5361df;">
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="custom-control-input" name="gender" id="male" value="Male">
+                    <label for="male" class="custom-control-label">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="custom-control-input" name="gender" id="female" value="Female">
+                    <label for="female" class="custom-control-label">Female</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><b>Profile Picture</b></label>
+            <input type="file" class="form-control" name="image" id="image" placeholder="Last Name" style="border-bottom-color:#5361df;">
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="Submit" class="btn" style="background-color:#5361df; color:white; ">
+</form>
+{% endblock %}
