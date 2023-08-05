@@ -178,6 +178,7 @@ def job_apply(request, myid):
             return redirect("/all_jobs")
     return render(request, "job_apply.html", {'job':job})
 
+
 def all_applicants(request):
     company = Company.objects.get(user=request.user)
     application = Application.objects.filter(company=company)
@@ -479,15 +480,20 @@ def applicant_info(request,aid):
 
     return render (request,"applicant_info.html",{'user':user,'applicant':applicant,'applications':applications})
 
+
 def pending_companies(request):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     companies = Company.objects.filter(status="Pending")
     return render(request, "pending_companies.html", {'companies':companies})
 
 def change_status(request, myid):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     company = Company.objects.get(id=myid)
 
     if request.method == "POST":
@@ -512,58 +518,84 @@ def change_status(request, myid):
         return redirect("/all_companies")
     return render(request, "change_status.html", {'company':company})
 
+
 def accepted_companies(request):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     companies = Company.objects.filter(status="Accepted")
     return render(request, "accepted_companies.html", {'companies':companies})
+
 
 def rejected_companies(request):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     companies = Company.objects.filter(status="Rejected")
     return render(request, "rejected_companies.html", {'companies':companies})
+
 
 def all_companies(request):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     companies = Company.objects.all()
     return render(request, "all_companies.html", {'companies':companies})
+
 
 def delete_company(request, myid):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     company = User.objects.filter(id=myid)
     company.delete()
     return redirect("/all_companies")
 
+
 def listed_jobs(request):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     jobs = Job.objects.all()
     return render(request,"listed_jobs.html",{'jobs':jobs})
+
 
 def accepted_jobs(request):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     jobs = Job.objects.filter(status="Accepted")
     return render(request,"accepted_jobs.html",{'jobs':jobs})
+
 
 def rejected_jobs(request):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     jobs = Job.objects.filter(status="Rejected")
     return render(request,"rejected_jobs.html",{'jobs':jobs})
+
 
 def pending_jobs(request):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     jobs = Job.objects.filter(status="Pending")
     return render(request,"pending_jobs.html",{'jobs':jobs})
 
 def admin_editjob(request, myid):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     job = Job.objects.get(id=myid)
     if request.method == "POST":
         title = request.POST.get('job_title')
@@ -597,16 +629,22 @@ def admin_editjob(request, myid):
         return redirect("/listed_jobs")
     return render(request, "admin_editjob.html", {'job':job})
 
+
 def admin_deletejob(request,myid):
     if not request.user.is_authenticated:
         return redirect("/user_login")
+    if not request.user.is_staff:
+        return redirect('/')
     job = Job.objects.filter(id=myid)
     job.delete()
     return redirect("/listed_jobs")
 
+
 def admin_editpass(request,uid):
     if not request.user.is_authenticated:
         return redirect('/user_login/')
+    if not request.user.is_staff:
+        return redirect('/')
     try:
         user = User.objects.get(id=uid)
         applicant = Applicant.objects.get(user=user)
@@ -653,5 +691,7 @@ def admin_editpass(request,uid):
     return render(request,"admin_editpass.html")
 
 def activity_logs(request):
+    if not request.user.is_staff:
+        return redirect('/')
     activities = Activity.objects.all()
     return render(request,"activity_logs.html",{'activities':activities})
